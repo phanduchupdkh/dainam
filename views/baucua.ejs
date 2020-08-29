@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bầu Cua Tôm Cá</title>
+  <style>
+	.row {
+		position: relative;
+		margin: 0 auto;
+		clear: both;
+	}
+	.col {
+		width : 50px;
+		height: 50px;
+		float: left;
+		text-align: center;
+	}
+	.head img {
+		margin: 20px;
+		width : 30vw;
+		height: 30vw;
+		display: flex;
+		padding: 2px 0;
+		border: 2px solid;
+		border-radius: 25px;
+	}
+	
+	.contai {
+		display: block;
+		width: 100vw;
+		height: 100vh;
+		background-image: url('./baucua/hinhnen.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.head {
+		display: flex;
+	}
+	.headend {
+		margin-bottom: 100px;
+	}
+	.batdia {
+		background-image: url('./baucua/batdia/dia.png');
+		background-size: cover;
+		margin: 0 auto;
+		padding: 1vw;
+		width : 90vw;
+		height: 90vw;
+
+	}
+	#bat-xoc img {
+		width : 85vw;
+		height: 85vw;
+		margin-top: 2vw;
+		margin-left: 2vw;
+	}
+	#linhvatxoc {
+		margin-left: 20vw;
+		margin-top: 20vw;
+	}
+	#linhvatxoc img {
+		margin-left: 10px;
+		width : 27vw;
+		height: 27vw;
+		border: 2px solid red;
+		border-radius: 25px;
+		
+	}
+	.hidden-bat {
+		display: none
+	}
+	
+  </style>
+</head>
+<body>
+	<div class="contai">
+		<div class="head">
+			<img class="linhvat" src="./baucua/linhvat/tom.jpg"/>
+			<img class="linhvat" src="./baucua/linhvat/bau.jpg"/>
+			<img class="linhvat" src="./baucua/linhvat/cua.jpg"/>
+		</div>
+		<div class="head headend">
+			<img class="linhvat" src="./baucua/linhvat/ca.jpg"/>
+			<img class="linhvat" src="./baucua/linhvat/nai.jpg"/>
+			<img class="linhvat" src="./baucua/linhvat/ga.jpg"/>
+		</div>
+
+		<div class="batdia" onclick="xocOrHidden()">
+			<div id='bat-xoc'>
+				<img class="bat"  src="./baucua/batdia/bat1.png"/>
+			</div>
+			<div id='linhvatxoc'>
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		let batXoc = document.getElementById('bat-xoc')
+		let linhvatxoc = document.getElementById('linhvatxoc')
+		let state = 1
+		let linVat =  ['bau','cua','tom','ca','ga','nai']
+		linhvatxoc.classList.add('hidden-bat')
+		
+		function xocOrHidden() {
+			if (state) {
+				batXoc.classList.add('hidden-bat')
+				linhvatxoc.classList.remove('hidden-bat')
+				state = 0
+				let lvXocs = [
+					parseInt(Math.random()*6),
+					parseInt(Math.random()*6),
+					parseInt(Math.random()*6)
+				]
+				linhvatxoc.innerHTML = `
+				<img class="linhvat" src="./baucua/linhvat/${linVat[lvXocs[0]]}.jpg"/>
+				<img class="linhvat" src="./baucua/linhvat/${linVat[lvXocs[1]]}.jpg"/>
+				<img class="linhvat" src="./baucua/linhvat/${linVat[lvXocs[2]]}.jpg"/>`
+			} else {
+				batXoc.classList.remove('hidden-bat')
+				linhvatxoc.classList.add('hidden-bat')
+				linhvatxoc.innerHTML =''
+				state = 1
+			}
+
+			
+		}
+	</script>
+</body>
+</html>

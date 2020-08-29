@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div.a {
+      text-align: center;
+    }
+
+    #exercise {
+      font-size: 30px;
+    }
+
+    #time {
+      font-size: 60px;
+    }
+
+    .rest {
+      color: chartreuse;
+    }
+
+    .practice {
+      color: firebrick;
+    }
+  </style>
+</head>
+
+<body>
+  <p>Design by PXD</p>
+  <div class="a">
+    <button id='start' onclick="startOrEnd()">Start</button>
+    <button id='pCheDo' onclick="doiChedo()">Nghỉ 15s</button>
+    <p id="time">0</p>
+    <div id='exImage'>
+      <img width="60%" src='https://i.pinimg.com/originals/7f/d6/45/7fd645a619b8865f4c32492f2ad4969d.png' />
+    </div>
+    <p id='exercise'>Plank knee to elbow </p>
+  </div>
+  <script>
+    let bt = [
+      { name: 'Plank knee to elbow', link: 'https://i.pinimg.com/originals/7f/d6/45/7fd645a619b8865f4c32492f2ad4969d.png' },
+      { name: 'Plank up&down', link: 'https://s3.amazonaws.com/prod.skimble/assets/609408/image_iphone.jpg' },
+      { name: 'Plank jack', link: 'https://i.ytimg.com/vi/PR9nHQXCZMo/maxresdefault.jpg' },
+      { name: 'Seated in&out', link: 'https://storage.googleapis.com/sworkit-assets/images/exercises/standard/middle-frame/in-and-out-ab.jpg' },
+      { name: 'Russian twist', link: 'https://cdn1.coachmag.co.uk/sites/coachmag/files/2016/07/russian-twist.jpg' },
+      { name: 'Chair sit-up', link: 'https://i.ytimg.com/vi/udyalrKYiuE/maxresdefault.jpg' },
+      { name: 'Laying windshield wiper', link: 'https://www.cdn.spotebi.com/wp-content/uploads/2014/10/windshield-wipers-exercise-illustration.jpg' },
+      { name: 'Abs sissors', link: 'https://i.ytimg.com/vi/ihG0E_4_tCM/maxresdefault.jpg' },
+      { name: 'Flutter kicks', link: 'https://i.ytimg.com/vi/ocRe4ccKeK4/maxresdefault.jpg' },
+      { name: 'Reverse plank', link: 'https://www.oxygenmag.com/.image/t_share/MTQ1MzQ3MzE1OTYyNjg1MjAx/emilyhayden26680.jpg' }
+    ]
+    const time = document.getElementById('time')
+    const exercise = document.getElementById('exercise')
+    const exImage = document.getElementById('exImage')
+    const pCheDo = document.getElementById('pCheDo')
+    let count = 0
+    let cheDo = 15
+    let isInGame = 0
+    let myVar
+    function startGame() {
+      myVar = setInterval(() => {
+        if (count === 10 * 60) { time.innerHTML = 'Bạn đã hoàn thành bài tập'; clearInterval(myVar); }
+        else {
+          count++
+          console.log(count)
+
+          if (count % 60 >= 60 - cheDo) {
+            exImage.innerHTML = `<p>Bài tiếp theo</p><img width='60%' src=${bt[Math.floor(count / 60) + 1].link} />`
+            exercise.innerHTML = bt[Math.floor(count / 60) + 1].name
+            time.classList.add('rest')
+            time.classList.remove('practice')
+            time.innerHTML = 60 - count % 60
+          } else {
+            exImage.innerHTML = `<img width='60%' src=${bt[Math.floor(count / 60)].link} />`
+            exercise.innerHTML = bt[Math.floor(count / 60)].name
+            time.classList.add('practice')
+            time.classList.remove('rest')
+            time.innerHTML = 60 - count % 60 - cheDo
+          }
+        }
+      }, 1000)
+    }
+
+    function startOrEnd() {
+      if (isInGame === 0) {
+        count = 0
+        isInGame = 1
+        startGame()
+      } else {
+        count = 0
+        isInGame = 0
+        clearInterval(myVar)
+      }
+
+    }
+
+    function doiChedo() {
+      if (cheDo === 15) {
+        cheDo = 30
+        count = 0
+        isInGame = 0
+        pCheDo.innerHTML = "Nghỉ 30 s"
+        clearInterval(myVar)
+      }
+      else {
+        cheDo = 15
+        count = 0
+        isInGame = 0
+        pCheDo.innerHTML = "Nghỉ 15 s"
+        clearInterval(myVar)
+      }
+    }
+
+  </script>
+</body>
+
+</html>

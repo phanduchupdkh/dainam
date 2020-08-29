@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The grid</title>
+  <style>
+      .row {
+    position: relative;
+    margin: 0 auto;
+    clear: both;
+    }
+    .col {
+    width : 20px;
+    height: 20px;
+    float: left;
+    background-color: blue;
+    border: solid 1px;
+    }
+    .snake {
+    background-color: red;
+    }
+    .localap {
+    background-color: yellow;
+    };
+  </style>
+</head>
+<body>
+    <div class="contai">
+        <!-- <div class="row">
+        <div class = "col 0s1"></div>
+        </div> -->
+        
+    </div>
+<script>
+    let strLage = "";
+    let huongdi = "right";
+    let lastHuong  = 'right';
+    let bodySnake = [0];
+    let localHead = [0,1];
+    function creatLocalApple (arr){
+        let rando =  Math.floor(Math.random()*400);
+        while (arr.indexOf(rando)>-1){
+            rando =  Math.floor(Math.random()*400);
+        }
+    return rando;
+    }
+    let localApple = creatLocalApple(bodySnake);
+    function creatCaro20(){
+        const contai = document.querySelector('.contai');
+        for (let i=0;i<20;i++){//creat caro 20x20
+        let strSmall = '';
+        for (let k=0;k<20;k++){
+           strSmall += `<div class = "col"></div>`
+        }
+        strLage += `<div class="row">${strSmall} </div>`
+        }
+        contai.innerHTML = strLage;
+    }
+    creatCaro20();
+    const caros = document.querySelectorAll('.col');
+    caros[0].classList.add('snake');
+    console.log(localApple);
+    caros[localApple].classList.add('localap');
+    function gameOver(){
+        let len = bodySnake.length;
+            for (let i=0;i<len;i++){
+                caros[bodySnake[i]].classList.remove('snake'); 
+            };
+            clearInterval(countUse); 
+            alert('Game Over.... Choi lai');
+            huongdi = "right";
+            lastHuong  = 'right';
+            bodySnake = [0];
+            localHead = [0,1];
+            startGame();
+    }
+    function startGame(){
+        countUse = setInterval(function (){
+        if (lastHuong === 'right' && huongdi==='left') {huongdi = 'right';}; 
+        if (lastHuong === 'left' && huongdi==='right') {huongdi = 'left';}; 
+        if (lastHuong === 'up' && huongdi==='down') {huongdi = 'up';}; 
+        if (lastHuong === 'down' && huongdi==='up') {huongdi = 'down';}; 
+        lastHuong = huongdi;
+        
+        if (huongdi === "right") {
+            localHead[1]++;
+            if (localHead[1]>19){localHead[1]=0};
+        }
+        if (huongdi === "left") {
+            localHead[1]--;
+            if (localHead[1]<0){localHead[1]=19;};
+        };
+        if (huongdi === "up") {
+            localHead[0]--;
+            if (localHead[0]<0){localHead[0]=19};
+        };
+        if (huongdi === "down") {
+            localHead[0]++;
+            if (localHead[0]>19){localHead[0]=0};
+        };
+        let newHead = localHead[0]*20+localHead[1];
+        caros[newHead].classList.add('snake');
+        if (newHead!==localApple){
+            caros[bodySnake[0]].classList.remove('snake');
+            bodySnake.shift();
+        } else {
+            caros[localApple].classList.remove('localap');
+            localApple = creatLocalApple(bodySnake);
+            caros[localApple].classList.add('localap');
+        }
+        if (bodySnake.indexOf(newHead)>-1){gameOver()};
+        bodySnake.push(newHead);
+        
+    },50);
+    }
+    startGame();
+    function snakeMove(e){
+        if(e.keyCode===38){huongdi = "up";};
+        if(e.keyCode===40){huongdi = "down"};
+        if(e.keyCode===39){huongdi = "right"};
+        if(e.keyCode===37){huongdi = "left"};
+    }
+    window.addEventListener('keydown',snakeMove);
+</script>
+</body>
+</html>
