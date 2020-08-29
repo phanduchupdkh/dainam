@@ -28,7 +28,7 @@ app.get('/myip', (req, res) => {
 	res.send(ip)
 })
 
-app.get('/paste', (req, res) => res.render('paste'))
+app.get('/bao-gia', (req, res) => res.render('paste'))
 app.get('/fitness', (req, res) => res.render('fitness'))
 app.get('/datcom', (req, res) => {
 		res.send('h')
