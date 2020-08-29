@@ -75,56 +75,8 @@
 </head>
 <body>
 	<div class="contai">
-		<div class="head">
-			<img class="linhvat" src="./baucua/linhvat/tom.jpg"/>
-			<img class="linhvat" src="./baucua/linhvat/bau.jpg"/>
-			<img class="linhvat" src="./baucua/linhvat/cua.jpg"/>
-		</div>
-		<div class="head headend">
-			<img class="linhvat" src="./baucua/linhvat/ca.jpg"/>
-			<img class="linhvat" src="./baucua/linhvat/nai.jpg"/>
-			<img class="linhvat" src="./baucua/linhvat/ga.jpg"/>
-		</div>
-
-		<div class="batdia" onclick="xocOrHidden()">
-			<div id='bat-xoc'>
-				<img class="bat"  src="./baucua/batdia/bat1.png"/>
-			</div>
-			<div id='linhvatxoc'>
-			</div>
-		</div>
+		Bao gia xay dung
 
 	</div>
-	<script type="text/javascript">
-		let batXoc = document.getElementById('bat-xoc')
-		let linhvatxoc = document.getElementById('linhvatxoc')
-		let state = 1
-		let linVat =  ['bau','cua','tom','ca','ga','nai']
-		linhvatxoc.classList.add('hidden-bat')
-		
-		function xocOrHidden() {
-			if (state) {
-				batXoc.classList.add('hidden-bat')
-				linhvatxoc.classList.remove('hidden-bat')
-				state = 0
-				let lvXocs = [
-					parseInt(Math.random()*6),
-					parseInt(Math.random()*6),
-					parseInt(Math.random()*6)
-				]
-				linhvatxoc.innerHTML = `
-				<img class="linhvat" src="./baucua/linhvat/${linVat[lvXocs[0]]}.jpg"/>
-				<img class="linhvat" src="./baucua/linhvat/${linVat[lvXocs[1]]}.jpg"/>
-				<img class="linhvat" src="./baucua/linhvat/${linVat[lvXocs[2]]}.jpg"/>`
-			} else {
-				batXoc.classList.remove('hidden-bat')
-				linhvatxoc.classList.add('hidden-bat')
-				linhvatxoc.innerHTML =''
-				state = 1
-			}
-
-			
-		}
-	</script>
 </body>
 </html>
