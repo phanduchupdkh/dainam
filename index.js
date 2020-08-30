@@ -2,12 +2,6 @@ require('dotenv').config();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-const fetch = require('node-fetch')
-const axios = require('axios')
-const { TelegramClient } = require('messaging-api-telegram')
-const username = 'duc.phan'
-const password = '12345678'
-const client = TelegramClient.connect('972402414:AAE5rvRgp3oanR7tRm7mO2YESRrpE4bya-Q')
 
 
 app.use(bodyParser.json()); // for parsing application/json
